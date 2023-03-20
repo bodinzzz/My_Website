@@ -1,0 +1,143 @@
+@import "../styles/variable.scss";
+@import "../styles/layout.scss";
+@import "../styles/index.scss";
+@import "../styles/breakpoint.scss";
+
+.project {
+  &__title {
+    @extend %page-title-basic;
+  }
+
+  &__container {
+    @extend %flex-col-start;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 10px;
+    padding-right: 10vw;
+    padding-left: 10vw;
+    @include breakpoint(sm) {
+      height: 500px;
+    }
+  }
+
+  &__content {
+    @extend %flex-col-center;
+  }
+  &__image--left {
+    position: absolute;
+    left: 10vw;
+    width: 50vw;
+    max-width: 800;
+    max-height: 400px;
+    height: auto;
+    opacity: 0.3;
+    &:hover {
+      opacity: 1;
+      transition: 0.5s;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  &__image--right {
+    position: absolute;
+    right: 10vw;
+    width: 50vw;
+    max-width: 800;
+    max-height: 400px;
+    height: auto;
+    opacity: 0.3;
+    &:hover {
+      opacity: 1;
+      transition: 0.5s;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__item {
+    @extend %flex-col-center;
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+  }
+
+  &__card {
+    position: relative;
+    z-index: 2;
+    width: 50vw;
+    padding: 20px;
+    background-color: rgb(255, 255, 255, 0.8);
+    border-radius: 10px;
+    align-self: flex-end;
+    &__type {
+      width: 100%;
+      text-align: start;
+      color: $text-secondary-color;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    &__title {
+      width: 100%;
+      text-align: start;
+      color: $primary-color;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+    &__role {
+      width: 100%;
+      text-align: start;
+      color: $text-primary-color;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    &__intro {
+      width: 100%;
+      text-align: start;
+      padding-top: 10px;
+      color: $text-secondary-color;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    &__button {
+      position: absolute !important;
+      top: 8px;
+      right: 12px;
+      color: $primary-color !important;
+    }
+    &__tools {
+      @extend %flex-end;
+      z-index: 2;
+      width: 100%;
+      padding-top: 8px;
+      color: $text-secondary-color;
+      font-size: 0.75rem;
+      div {
+        padding-right: 12px;
+      }
+    }
+  }
+
+  &__modal {
+    @extend %flex-col-center;
+    &__container {
+      @extend %flex-col-center;
+      background-color: $white-color;
+      border-radius: 10px;
+      width: 70vw;
+    }
+
+    &__content {
+      padding: 20px;
+
+      &__title {
+        font-size: 1.25rem;
+        color: $primary-color;
+        font-weight: bold;
+      }
+    }
+  }
+}

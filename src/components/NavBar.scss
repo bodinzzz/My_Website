@@ -1,0 +1,40 @@
+@import "../styles/variable.scss";
+@import "../styles/layout.scss";
+
+.nav-bar {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-between;
+  &__links {
+    &__link {
+      span {
+        color: $primary-color;
+      }
+    }
+    &__button {
+      background-color: $primary-color !important;
+      color: rgb(31, 54, 54);
+      margin: 0.5rem;
+    }
+  }
+  &__drawer {
+    &__title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      span {
+        color: rgb(47, 52, 52);
+        padding: 10px;
+      }
+    }
+  }
+  &__logo {
+    @extend %flex-center;
+    &__text {
+      color: $primary-color;
+      padding: 10px;
+      font-weight: bold;
+    }
+  }
+}

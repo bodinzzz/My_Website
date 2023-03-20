@@ -1,0 +1,110 @@
+@import "../styles/variable.scss";
+@import "../styles/layout.scss";
+@import "../styles/index.scss";
+@import "../styles/breakpoint.scss";
+
+@mixin card-place($theme-color) {
+  @extend %flex-center;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  background-color: $theme-color;
+  padding: 4px 1rem 4px 1rem;
+}
+
+.experience {
+  &__title {
+    @extend %page-title-basic;
+  }
+  &__cards {
+    width: 80vw;
+    // make every thing align center
+    margin: 0 auto;
+    @include breakpoint(md) {
+      width: 90vw;
+    }
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @include breakpoint(md) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  &__card {
+    @extend %flex-col-start;
+    background-color: $white-color;
+    margin: 0px 30px 0px 30px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: $block-box-shadow;
+    @include breakpoint(lg) {
+      margin: 0px 10px 0px 10px;
+    }
+    @include breakpoint(md) {
+      @extend %flex-start;
+      flex-direction: row;
+      margin-bottom: 12px;
+    }
+
+    &__image {
+      width: 70px;
+      @include breakpoint(md) {
+        align-self: start;
+      }
+    }
+    &__time {
+      color: $text-secondary-color;
+      font-size: 0.5rem;
+      padding: 8px;
+      @include breakpoint(md) {
+        padding: 0px;
+      }
+    }
+    &__place {
+      &--green {
+        @include card-place($green-color);
+      }
+      &--yellow {
+        @include card-place($yellow-color);
+      }
+      &--orange {
+        @include card-place($orange-color);
+      }
+    }
+    &__title {
+      font-size: 1rem;
+      color: $black-color;
+      font-weight: bold;
+      padding: 10px;
+      @include breakpoint(md) {
+        white-space: pre-line;
+      }
+    }
+    &__description {
+      width: 100%;
+      font-size: 0.75rem;
+      color: $text-secondary-color;
+      white-space: pre-line;
+      text-align: start;
+      line-height: 30px;
+      padding-top: 8px;
+      @include breakpoint(sm) {
+        padding-left: 8px;
+        white-space: pre-line;
+        align-items: start;
+      }
+    }
+
+    &__align-box--2 {
+      @extend %flex-col-center;
+      @include breakpoint(md) {
+        padding-left: 8px;
+        align-items: start;
+      }
+    }
+    &__align-box--3 {
+      @extend %flex-col-center;
+      @include breakpoint(md) {
+        flex-direction: row;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "./layout.scss";
+
+%page-title-basic {
+  @extend %flex-start;
+  padding-left: 10vw;
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+  width: 100%;
+}

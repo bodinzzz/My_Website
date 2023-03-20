@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect, useState } from "react";
+import "./App.css";
+import NavBar from "./components/NavBar";
+import Home from "./pages/Home";
+import AboutMe from "./pages/AboutMe";
+import Experience from "./pages/Experience";
+import Project from "./pages/Project";
+import { createTheme, ThemeProvider, Typography, Button } from "@mui/material";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Roboto Mono", "Noto Sans Traditional Chinese"].join(","),
+  },
+});
 
 function App() {
+  const aboutMeRef = useRef<HTMLDivElement>(null);
+  const experienceRef = useRef<HTMLDivElement>(null);
+  const projectRef = useRef<HTMLDivElement>(null);
+
+  const [refs, setRefs] = useState<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    const aboutMeRefElement = aboutMeRef.current as HTMLDivElement;
+    const experienceRefElement = experienceRef.current as HTMLDivElement;
+    const projectRefElement = projectRef.current as HTMLDivElement;
+
+    if (aboutMeRefElement && experienceRefElement && projectRefElement) {
+      setRefs([aboutMeRefElement, experienceRefElement, projectRefElement]);
+    }
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <NavBar refs={refs} />
+        <Home />
+        <div ref={aboutMeRef} />
+        <AboutMe />
+        <div ref={experienceRef} />
+        <Experience />
+        <div ref={projectRef} />
+        <Project />
+      </ThemeProvider>
     </div>
   );
 }
