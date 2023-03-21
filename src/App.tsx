@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import AboutMe from "./pages/AboutMe";
 import Experience from "./pages/Experience";
 import Project from "./pages/Project";
-import { createTheme, ThemeProvider, Typography, Button } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 const theme = createTheme({
   typography: {
@@ -17,7 +17,6 @@ function App() {
   const aboutMeRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
-
   const [refs, setRefs] = useState<HTMLDivElement[]>([]);
 
   useEffect(() => {

@@ -12,6 +12,15 @@ const theme = createTheme({
   },
 });
 
+const handleResumeClick = () => {
+  console.log("TEST");
+};
+
+const handleEmailClick = () => {
+  const email = "sandy900825@gmail.com";
+  window.location.href = `mailto:${email}`;
+};
+
 function Home() {
   const pageRef = useRef(null);
   return (
@@ -22,10 +31,10 @@ function Home() {
             Welcome to <br />
             Bodin's Playground
           </Typography>
-          <Button className="home__button" startIcon={<FeedIcon />}>
+          <Button className="home__button" startIcon={<FeedIcon />} onClick={handleResumeClick}>
             <span>Resume</span>
           </Button>
-          <Button className="home__button" startIcon={<EmailIcon />}>
+          <Button className="home__button" startIcon={<EmailIcon />} onClick={handleEmailClick}>
             <span>Contact me</span>
           </Button>
         </div>

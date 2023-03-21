@@ -16,24 +16,33 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import BoboFrog from "../assets/images/BoboFrog.png";
 import Avatar from "@mui/material/Avatar";
-import FeedIcon from "@mui/icons-material/Feed";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import Slide from "@mui/material/Slide";
 
 const drawerWidth = 240;
 const navLinks = ["01.About", "02.Experience", "03.project"];
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
   refs: HTMLDivElement[];
+}
+interface scrollProps {
+  children: React.ReactElement;
+}
+
+function HideOnScroll(props: scrollProps) {
+  const { children } = props;
+  const trigger = useScrollTrigger();
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
 }
 
 function NavBar(props: Props) {
-  const { window, refs } = props;
+  const { refs } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  console.log("HERE", refs);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -42,8 +51,7 @@ function NavBar(props: Props) {
   const handleClick = (ref: HTMLDivElement) => {
     if (ref) {
       ref.scrollIntoView({ behavior: "smooth" });
-    } else {
-      console.log("NOTHING");
+      setMobileOpen(false);
     }
   };
 
@@ -57,7 +65,12 @@ function NavBar(props: Props) {
       <List>
         {navLinks.map((link, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemButton
+              sx={{ textAlign: "center" }}
+              onClick={() => {
+                handleClick(refs[index]);
+              }}
+            >
               <ListItemText primary={link} />
             </ListItemButton>
           </ListItem>
@@ -66,40 +79,39 @@ function NavBar(props: Props) {
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav">
-        <Toolbar className="nav-bar">
-          <Box className="nav-bar__logo">
-            <Avatar alt={BoboFrog} src={BoboFrog} />
-            <Typography className="nav-bar__logo__text">Bodinzzz</Typography>
-          </Box>
-          <IconButton aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
-            <MenuIcon />
-          </IconButton>
-          <Box className="nav-bar__links" sx={{ display: { xs: "none", sm: "block" } }}>
-            {navLinks.map((link, index) => (
-              <Button
-                className="nav-bar__links__link"
-                key={index}
-                onClick={() => {
-                  handleClick(refs[index]);
-                }}
-              >
-                <span>{link}</span>
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <HideOnScroll {...props}>
+        <AppBar component="nav">
+          <Toolbar className="nav-bar">
+            <Box className="nav-bar__logo">
+              <Avatar alt={BoboFrog} src={BoboFrog} />
+              <Typography className="nav-bar__logo__text">Bodinzzz</Typography>
+            </Box>
+            <IconButton aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
+              <MenuIcon />
+            </IconButton>
+            <Box className="nav-bar__links" sx={{ display: { xs: "none", sm: "block" } }}>
+              {navLinks.map((link, index) => (
+                <Button
+                  className="nav-bar__links__link"
+                  key={index}
+                  onClick={() => {
+                    handleClick(refs[index]);
+                  }}
+                >
+                  <span>{link}</span>
+                </Button>
+              ))}
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
       {/* DRAWER */}
       <Box component="nav">
         <Drawer
           anchor="right"
-          container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}

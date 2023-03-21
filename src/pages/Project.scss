@@ -73,6 +73,9 @@
     background-color: rgb(255, 255, 255, 0.8);
     border-radius: 10px;
     align-self: flex-end;
+    @include breakpoint(md) {
+      width: 80vw;
+    }
     &__type {
       width: 100%;
       text-align: start;
@@ -121,23 +124,40 @@
     }
   }
 
-  &__modal {
-    @extend %flex-col-center;
-    &__container {
-      @extend %flex-col-center;
-      background-color: $white-color;
-      border-radius: 10px;
-      width: 70vw;
-    }
+  // &__modal {
+  //   @extend %flex-col-center;
+  //   &__container {
+  //     @extend %flex-col-center;
+  //     background-color: $white-color;
+  //     border-radius: 10px;
+  //     width: 70vw;
+  //   }
 
-    &__content {
-      padding: 20px;
+  //   &__content {
+  //     padding: 20px;
+  //     width: 100%;
+  //     text-align: start;
 
-      &__title {
-        font-size: 1.25rem;
-        color: $primary-color;
-        font-weight: bold;
-      }
-    }
-  }
+  //     &__title {
+  //       font-size: 1.25rem;
+  //       color: $primary-color;
+  //       font-weight: bold;
+  //       padding-top: 1rem;
+  //     }
+  //     &__section-title {
+  //       font-size: 1rem;
+  //       padding-top: 1rem;
+  //       color: $primary-color;
+  //       font-weight: bold;
+  //     }
+  //     &__section-content {
+  //       font-size: 0.75rem;
+  //       padding-top: 0.5rem;
+  //       font-weight: bold;
+  //       color: $text-primary-color;
+  //       white-space: pre-line;
+  //       line-height: 2;
+  //     }
+  //   }
+  // }
 }
