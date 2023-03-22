@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/My_Website/static/css/main.eb5f7ff4.css",
+    "main.js": "/My_Website/static/js/main.0608aa76.js",
+    "static/js/787.8c37e764.chunk.js": "/My_Website/static/js/787.8c37e764.chunk.js",
+    "static/media/BoboFrog.png": "/My_Website/static/media/BoboFrog.7c8c63b0da7b6e08d1b0.png",
+    "static/media/ProjectTwoImg.png": "/My_Website/static/media/ProjectTwoImg.ec037e6fd9cfbc5e743a.png",
+    "static/media/BgImg.png": "/My_Website/static/media/BgImg.5a5d83322bb75f8e88e7.png",
+    "static/media/ProjectThreeImg.png": "/My_Website/static/media/ProjectThreeImg.749e18f32934ebb3dcbf.png",
+    "static/media/ProjectOneImg.png": "/My_Website/static/media/ProjectOneImg.6cd6b0c6e47f3496bcfd.png",
+    "static/media/ExperienceThreeImg.svg": "/My_Website/static/media/ExperienceThreeImg.d46c12d18074db2c07453549b140ac1e.svg",
+    "static/media/ExperienceOneImg.svg": "/My_Website/static/media/ExperienceOneImg.cdeede2a2a4ec1570b5ef03c6ca9459e.svg",
+    "static/media/ExperienceTwoImg.svg": "/My_Website/static/media/ExperienceTwoImg.d942787c8c5b9721dd49b617fdf5cd2f.svg",
+    "index.html": "/My_Website/index.html",
+    "main.eb5f7ff4.css.map": "/My_Website/static/css/main.eb5f7ff4.css.map",
+    "main.0608aa76.js.map": "/My_Website/static/js/main.0608aa76.js.map",
+    "787.8c37e764.chunk.js.map": "/My_Website/static/js/787.8c37e764.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb5f7ff4.css",
+    "static/js/main.0608aa76.js"
+  ]
+}
