@@ -4,7 +4,11 @@ import { createTheme, ThemeProvider, Typography, Button, Avatar, Divider } from 
 import FeedIcon from "@mui/icons-material/Feed";
 import BgImg from "../assets/images/BgImg.png";
 import EmailIcon from "@mui/icons-material/Email";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { homeWelcomeAnimation } from "../styles/animation";
+import { useInView, useAnimate } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
 
 const theme = createTheme({
   typography: {
@@ -23,10 +27,14 @@ const handleEmailClick = () => {
 
 function Home() {
   const pageRef = useRef(null);
+  const isInView = useInView(pageRef, { once: false });
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, -200]);
+
   return (
     <div className="home" ref={pageRef}>
       <ThemeProvider theme={theme}>
-        <div className="home__welcome">
+        <motion.div className="home__welcome" variants={homeWelcomeAnimation} animate={isInView ? "visible" : "hidden"}>
           <Typography variant="h5" className="home__welcome-text" gutterBottom>
             Welcome to <br />
             Bodin's Playground
@@ -37,9 +45,9 @@ function Home() {
           <Button className="home__button" startIcon={<EmailIcon />} onClick={handleEmailClick}>
             <span>Contact me</span>
           </Button>
-        </div>
+        </motion.div>
       </ThemeProvider>
-      <img className="home__img__bg" src={BgImg}></img>
+      <motion.img className="home__img__bg" src={BgImg} style={{ y }}></motion.img>
     </div>
   );
 }

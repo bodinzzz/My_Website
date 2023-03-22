@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./Experience.scss";
 import { Typography } from "@mui/material";
 import ExperienceOneImg from "../assets/images/ExperienceOneImg.svg";
 import ExperienceTwoImg from "../assets/images/ExperienceTwoImg.svg";
 import ExperienceThreeImg from "../assets/images/ExperienceThreeImg.svg";
+import { motion } from "framer-motion";
+import { experienceContainerAnimation, experienceItemAnimation } from "../styles/animation";
+import { useInView, useAnimate } from "framer-motion";
 
 const experienceData = [
   {
@@ -36,15 +39,32 @@ const experienceData = [
 const cardStyles = ["green", "yellow", "orange"];
 
 function Experience() {
+  const [scope, animate] = useAnimate();
+  const isInView = useInView(scope, { once: false });
+  useEffect(() => {
+    if (isInView) {
+      animate(scope.current, { opacity: 1 }, { duration: 1.5 });
+    }
+  }, [isInView]);
+
+  const title = {
+    hidden: { x: -50, opacity: 0 },
+    visible: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
-    <div className="experience">
+    <div className="experience" ref={scope}>
       <Typography className="experience__title" variant="h5">
         02. Experience
       </Typography>
-      <div className="experience__cards">
+      <motion.div className="experience__cards" variants={experienceContainerAnimation} initial="hidden" animate={isInView ? "visible" : "hidden"}>
         {experienceData.map((data, index) => {
           return (
-            <div className="experience__card" key={index}>
+            <motion.div className="experience__card" key={index} variants={experienceItemAnimation}>
               <img className="experience__card__image" src={data.img} alt="Experience" />
               <div className="experience__card__align-box--2">
                 <div className="experience__card__time">{data.time}</div>
@@ -54,10 +74,10 @@ function Experience() {
                 </div>
                 <div className="experience__card__description">{data.description}</div>
               </div>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 }

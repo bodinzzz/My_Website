@@ -1,14 +1,15 @@
-import { Typography, Modal, Box, Button, IconButton, Link } from "@mui/material";
+import { Typography, IconButton } from "@mui/material";
 import React from "react";
 import "./Project.scss";
 import ProjectOneImg from "../assets/images/ProjectOneImg.png";
 import ProjectTwoImg from "../assets/images/ProjectTwoImg.png";
 import ProjectThreeImg from "../assets/images/ProjectThreeImg.png";
 import { useEffect, useRef, useState } from "react";
-import KeyboardDoubleArrowRightOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowRightOutlined";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ArticleIcon from "@mui/icons-material/Article";
+import { motion, useInView, useAnimate } from "framer-motion";
+import { projectContainerAnimation, projectItemAnimation } from "../styles/animation";
 
 const projectData = [
   {
@@ -51,9 +52,11 @@ function Project() {
   const imageRef = useRef<HTMLImageElement>(null);
   const [width, setWidth] = useState(window.innerWidth);
 
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
+  const elementRef1 = useRef(null);
+  const elementRef2 = useRef(null);
+  const elementRef3 = useRef(null);
+
+  const elementRefs = [elementRef1, elementRef2, elementRef3];
 
   const handleClick = (linkUrl: string) => {
     window.open(linkUrl, "_blank");
@@ -73,17 +76,37 @@ function Project() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const [scope, animate] = useAnimate();
+  const isInView = useInView(scope, { once: false });
+  const isInView1 = useInView(elementRefs[0], { once: false });
+  const isInView2 = useInView(elementRefs[1], { once: false });
+  const isInView3 = useInView(elementRefs[2], { once: false });
+  const isInViews = [isInView1, isInView2, isInView3];
+  useEffect(() => {
+    if (isInView) {
+      animate(scope.current, { opacity: 1 }, { duration: 1.5 });
+    }
+  }, [isInView]);
+
   return (
     <div className="project">
       <Typography className="project__title" variant="h5">
         03. Project
       </Typography>
-      <div className="project__content">
+      <motion.div className="project__content" ref={scope}>
         {projectData.map((data, index) => {
           return (
-            <div className="project__container" style={{ minHeight: imageHeight }} key={index}>
+            <motion.div
+              className="project__container"
+              style={{ minHeight: imageHeight }}
+              key={index}
+              ref={elementRefs[index]}
+              variants={projectContainerAnimation}
+              initial="hidden"
+              animate={isInViews[index] ? "visible" : "hidden"}
+            >
               <img className={index % 2 === 0 ? "project__image--left" : "project__image--right"} src={data.image} alt="ProjectImg" ref={imageRef} />
-              <div className="project__item">
+              <motion.div className="project__item" variants={projectItemAnimation}>
                 <div className="project__card" style={index % 2 === 0 ? { alignSelf: "flex-end" } : { alignSelf: "flex-start" }} key={index}>
                   {index === 0 ? (
                     <div className="project__card__button">
@@ -121,29 +144,11 @@ function Project() {
                     return <div key={index}>{tool}</div>;
                   })}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           );
         })}
-      </div>
-      {/* <Modal
-        className="project__modal"
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <div className="project__modal__container">
-          <div className="project__modal__content">
-            <div className="project__modal__content__title">{projectData[0].title}</div>
-            <div className="project__modal__content__section-title">01. 簡介</div>
-            <div className="project__modal__content__section-content">{projectData[0].intro}</div>
-            <div className="project__modal__content__section-title">02. 我們初期訂定的目標</div>
-            <div className="project__modal__content__section-content">{projectData[0].goals}</div>
-            <div className="project__modal__content__section-title">03. 專案流程與貢獻</div>
-          </div>
-        </div>
-      </Modal> */}
+      </motion.div>
     </div>
   );
 }

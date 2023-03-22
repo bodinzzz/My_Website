@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./AboutMe.scss";
 import { createTheme, ThemeProvider, Typography, Button, Card, Avatar, Divider, Box, IconButton } from "@mui/material";
 import BoboFrog from "../assets/images/BoboFrog.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailIcon from "@mui/icons-material/Email";
+import { motion } from "framer-motion";
+import { aboutMeAnimation } from "../styles/animation";
+import { useInView, useAnimate } from "framer-motion";
 
 const theme = createTheme({
   typography: {
@@ -49,18 +52,24 @@ const IntroCard = () => {
 };
 
 function AboutMe() {
+  const pageRef = useRef(null);
+  const isInView = useInView(pageRef, { once: false });
   return (
-    <ThemeProvider theme={theme}>
-      <Typography className="about-me__title" variant="h5">
-        01. About
-      </Typography>
-      <div className="about-me__content">
-        <IntroCard />
-        <Typography className="about-me__intro" style={{ whiteSpace: "pre-line" }}>
-          {intro}
+    <motion.div ref={pageRef}>
+      <ThemeProvider theme={theme}>
+        <Typography className="about-me__title" variant="h5">
+          01. About
         </Typography>
-      </div>
-    </ThemeProvider>
+        <motion.div animate={isInView ? "visible" : "hidden"} variants={aboutMeAnimation}>
+          <div className="about-me__content">
+            <IntroCard />
+            <Typography className="about-me__intro" style={{ whiteSpace: "pre-line" }}>
+              {intro}
+            </Typography>
+          </div>
+        </motion.div>
+      </ThemeProvider>
+    </motion.div>
   );
 }
 
