@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import AboutMe from "./pages/AboutMe";
 import Experience from "./pages/Experience";
 import Project from "./pages/Project";
+import BottomBar from "./components/BottomBar";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 const theme = createTheme({
@@ -40,6 +41,7 @@ function App() {
         <Experience />
         <div ref={projectRef} />
         <Project />
+        <BottomBar />
       </ThemeProvider>
     </div>
   );
