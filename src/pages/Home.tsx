@@ -17,7 +17,7 @@ const theme = createTheme({
 });
 
 const handleResumeClick = () => {
-  console.log("TEST");
+  window.open("https://drive.google.com/file/d/1iaJ2VY6k_4T87nTOZsNvL8gL2amuX2Ic/view?usp=sharing", "_blank");
 };
 
 const handleEmailClick = () => {
