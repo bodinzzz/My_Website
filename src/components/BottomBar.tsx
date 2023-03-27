@@ -19,7 +19,7 @@ function BottomBar() {
     <div className="bottom-bar">
       <div className="bottom-bar__copy-right">Copyright © 2023 Bodinzzz</div>
       <div className="bottom-bar__links">
-        <IconButton onClick={() => handleClick("https://drive.google.com/file/d/1ygvJH_x1eTwzSU5FGSpQZ0Du1zLkTL26/view?usp=sharing")}>
+        <IconButton onClick={() => handleClick("https://drive.google.com/file/d/1kif-747H1wz_OQZzfJE8WD8sk0batXo6/view?usp=sharing")}>
           <FeedIcon />
         </IconButton>
         <IconButton onClick={() => handleClick("https://www.linkedin.com/in/%E5%90%8D%E5%AE%B9-%E8%95%AD-a14358207/")}>
